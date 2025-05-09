@@ -1,6 +1,7 @@
 # Example usage
 note this relies on type hints in the function definition and the Args: section of the docstring to extract better definitions of the parameters.
 
+```
 @tool_definition_decorator
 def my_function(a: str, b: list) -> str:
     """
@@ -13,3 +14,4 @@ def my_function(a: str, b: list) -> str:
     return "success"
 
 my_function.tool_definition
+```
