@@ -1,4 +1,5 @@
 import inspect
+from docstring_parser import parse
 
 def tool_definition_decorator(func):
     """
@@ -60,6 +61,14 @@ def tool_definition_decorator(func):
         # Determine if parameter is required
         if param.default == inspect.Parameter.empty:
             required.append(name)
+    
+    # Parse the docstring
+    docstring = inspect.getdoc(func)
+    if docstring:
+        parsed = parse(docstring)
+        for param in parsed.params:
+            if param.arg_name in parameters:
+                parameters[param.arg_name]["description"] = param.description
 
     # Get function description from docstring, or default
     description = func.__doc__ or "No description provided."
